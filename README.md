@@ -10,7 +10,7 @@ This project creates an Azure Container Instance running nginx that acts as an S
 
 ```
 ┌─────────────────┐    ┌──────────────────┐    ┌─────────────────┐
-│   IoT Devices   │───▶│  Container       │───▶│   Azure IoT     │
+│   IoT Devices   │──> │  Container       │───>│   Azure IoT     │
 │                 │    │  Instance        │    │   Hub           │
 │                 │    │  (nginx proxy)   │    │                 │
 └─────────────────┘    └──────────────────┘    └─────────────────┘
