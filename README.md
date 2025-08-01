@@ -41,8 +41,6 @@ This project creates an Azure Container Instance running nginx that acts as an S
 │   └── 01-get-certificate.sh       # Certificate retrieval script
 ├── templates/
 │   └── nginx.conf.template         # Nginx configuration template
-├── misc/
-│   └── mime.types                  # MIME types configuration
 └── secrets/
     ├── lgtest.crt                  # Local test certificate
     └── lgtest.key                  # Local test private key
