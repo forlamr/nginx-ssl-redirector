@@ -287,7 +287,7 @@ properties:
       workspaceKey: $workspaceKey
 "@ 
     
-    Write-Host $yaml -ForegroundColor Cyan
+    # Write-Host $yaml -ForegroundColor Cyan
 
     $yamlFile = [System.IO.Path]::GetTempFileName() + ".yaml"
     $yaml | Out-File -FilePath $yamlFile -Encoding UTF8
