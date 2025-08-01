@@ -139,8 +139,7 @@ This script:
 
 - **Managed Identity**: Uses Azure Managed Identity for Key Vault access (no secrets in code)
 - **Certificate Rotation**: Automatically retrieves fresh certificates on container restart
-- **Network Security**: Consider using Azure Virtual Network for production deployments
-- **Key Vault Access**: Ensure proper RBAC permissions for the managed identity
+- **Key Vault Access**: Ensure proper RBAC permissions [_Key Vault Secret User_ + _Key Vault Certificate User_] for the managed identity
 
 ## Monitoring and Troubleshooting
 
