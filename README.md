@@ -39,11 +39,8 @@ This project creates an Azure Container Instance running nginx that acts as an S
 ├── run-docker-locally.ps1          # Local development script
 ├── scripts/
 │   └── 01-get-certificate.sh       # Certificate retrieval script
-├── templates/
-│   └── nginx.conf.template         # Nginx configuration template
-└── secrets/
-    ├── lgtest.crt                  # Local test certificate
-    └── lgtest.key                  # Local test private key
+└── templates/
+    └── nginx.conf.template         # Nginx configuration template
 ```
 
 ## Features
