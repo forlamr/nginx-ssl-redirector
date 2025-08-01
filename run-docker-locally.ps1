@@ -1,5 +1,6 @@
 param(
-    [string]$KeyVaultSecretUrl = "https://kv-lgcertificates.vault.azure.net/secrets/lgtest-eu-wildcard2cbd9cbc-05e5-4efe-a81e-695a183ff1ea/a0b6cbb2632243f59d6497311839dbd1"
+    [Parameter(Mandatory=$true)][string]$IotHubHostname,
+    [Parameter(Mandatory=$true)][string]$KeyVaultSecretUrl
 )
 
 $pwd_slashes = $pwd -replace '\\', '/'
@@ -11,7 +12,7 @@ docker run --rm `
   -e TOKEN=$token `
   -e KV_SECRET_URL=$KeyVaultSecretUrl `
   -e NGINX_ENVSUBST_OUTPUT_DIR=/etc/nginx `
-  -e IOTHUB_HOSTNAME=testgewissiotcipher.azure-devices.net `
+  -e IOTHUB_HOSTNAME=$IotHubHostname `
   -p 8883:8883 `
   -p 4080:80 `
   -p 4443:443 `
