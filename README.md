@@ -153,11 +153,6 @@ Use these KQL queries to monitor the container:
 ContainerInstanceLog_CL
 | where ContainerGroup_s == "your-container-name"
 | order by TimeGenerated desc
-
-// Error analysis
-ContainerInstanceLog_CL
-| where ContainerGroup_s == "your-container-name" and LogSource_s == "stderr"
-| order by TimeGenerated desc
 ```
 
 ### Common Issues
