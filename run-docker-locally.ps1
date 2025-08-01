@@ -1,6 +1,6 @@
 param(
     [Parameter(Mandatory=$true)][string]$IotHubHostname,
-    [Parameter(Mandatory=$true)][string]$KeyVaultSecretUrl
+    [Parameter(Mandatory=$false)][string]$KeyVaultSecretUrl
 )
 
 $pwd_slashes = $pwd -replace '\\', '/'
@@ -18,4 +18,5 @@ docker run --rm `
   -p 4443:443 `
   nginx:latest
 
-#--mount "type=bind,source=$pwd_slashes/secrets,target=/certs" `
+  # Add the following line if you want to mount local certificates
+  #--mount "type=bind,source=$pwd_slashes/secrets,target=/certs" `
