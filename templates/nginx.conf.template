@@ -35,7 +35,6 @@ stream {
         
         # Proxy settings
         proxy_pass azure_iothub;
-        proxy_timeout 10s;
         proxy_connect_timeout 10s;
         proxy_timeout 24h;
         
