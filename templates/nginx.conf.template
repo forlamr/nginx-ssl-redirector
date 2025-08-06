@@ -37,6 +37,7 @@ stream {
         proxy_pass azure_iothub;
         proxy_timeout 10s;
         proxy_connect_timeout 10s;
+        proxy_timeout 1h;
         
         # Enable SSL when connecting to upstream
         proxy_ssl on;
