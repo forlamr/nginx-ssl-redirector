@@ -95,6 +95,8 @@ try {
         --sku Standard_ZRS `
         --kind StorageV2 `
         --enable-large-file-share `
+        --allow-shared-key-access true `
+        --public-network-access Enabled `
         --access-tier Hot
     
     if ($LASTEXITCODE -ne 0) {
