@@ -11,7 +11,7 @@ param locationShort string
 @description('Azure region for resource deployment')
 param location string = resourceGroup().location
 
-@description('Forwaring port list')
+@description('Forwarding port list')
 param ports array = [
   8883
   443
