@@ -5,6 +5,7 @@ Questo progetto contiene un insieme di template Bicep che descrivono la seguente
 ## Architettura
 
 ### Rete Virtuale (VNet)
+
 - **VNet**: `vnet-{appname}-{locationshort}` con CIDR 10.0.0.0/16
 - **Subnet**:
   - `default`: 10.0.0.0/24
@@ -13,17 +14,20 @@ Questo progetto contiene un insieme di template Bicep che descrivono la seguente
   - `AzureFirewallManagementSubnet`: 10.0.2.64/26
 
 ### Container App Environment
+
 - **Container App Environment**: `cae-{appname}-{locationshort}`
   - Tipo: Internal (BYOVNET - Bring Your Own Virtual Network)
   - Attestato sulla subnet "aca" (10.0.1.0/24)
 
 ### Container App
+
 - **Container App**: `ca-nginx-forwarder-{appname}-{locationshort}`
   - Immagine: nginx:latest
   - Ingress: TCP su porta 8883
   - Aperto all'esterno dell'ambiente
 
 ### Azure Firewall
+
 - **Azure Firewall**: `afw-{appname}-{locationshort}`
   - Tipo: Basic
   - IP Pubblico: `pip-fw-{appname}-{locationshort}`
@@ -50,10 +54,12 @@ iac2/
 Tutti i nomi delle risorse seguono il formato: `{abbreviazione-risorsa}-{appname}-{locationshort}`
 
 Dove:
+
 - `appname`: Nome dell'applicazione (parametro)
 - `locationshort`: Codice breve della location (parametro)
 
 ### Abbreviazioni Utilizzate
+
 - `vnet`: Virtual Network
 - `afw`: Azure Firewall
 - `pip`: Public IP Address
@@ -78,12 +84,12 @@ az deployment group create \
 ## Parametri
 
 I parametri del template principale sono:
+
 - `appName`: Nome dell'applicazione (default: "depolicify")
 - `locationShort`: Codice breve della location (default: "itn")
 - `location`: Region Azure (default: "italynorth")
 
 ## Note
 
-- L'indirizzo IP 10.0.1.57 nel NAT del firewall è un placeholder e dovrebbe essere sostituito con l'IP effettivo del Container App dopo il deployment
 - Il Container App Environment è configurato come Internal, quindi non è direttamente accessibile da Internet
 - Il traffico pubblico viene instradato attraverso Azure Firewall che effettua il NAT verso il Container App
