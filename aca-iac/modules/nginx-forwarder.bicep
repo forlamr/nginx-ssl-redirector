@@ -53,7 +53,7 @@ resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
         additionalPortMappings: [for p in skip(ports,1): {
           external: true
           targetPort: p
-            exposedPort: p
+          exposedPort: p
         }]
       }
     }
