@@ -13,8 +13,14 @@ param firewallSubnetId string
 @description('Firewall management subnet ID')
 param firewallMgmtSubnetId string
 
+@description('Ports to forward')
+param ports array
+
+@description('Ingress private IP address of the Container App Environment')
+param ingressPrivateIp string
+
 // Public IP for Firewall
-resource firewallPublicIp 'Microsoft.Network/publicIPAddresses@2024-05-01' = {
+resource firewallPublicIp 'Microsoft.Network/publicIPAddresses@2022-05-01' = {
   name: 'pip-fw-${appName}-${locationShort}'
   location: location
   sku: {
@@ -28,7 +34,7 @@ resource firewallPublicIp 'Microsoft.Network/publicIPAddresses@2024-05-01' = {
 }
 
 // Public IP for Firewall Management
-resource firewallMgmtPublicIp 'Microsoft.Network/publicIPAddresses@2024-05-01' = {
+resource firewallMgmtPublicIp 'Microsoft.Network/publicIPAddresses@2022-05-01' = {
   name: 'pip-fwmgmt-${appName}-${locationShort}'
   location: location
   sku: {
@@ -41,8 +47,20 @@ resource firewallMgmtPublicIp 'Microsoft.Network/publicIPAddresses@2024-05-01' =
   }
 }
 
+// Deploy NAT Rules
+module fwPolicy 'firewall-policy.bicep' = {
+  name: 'firewall-policy-deployment'
+  params: {
+    location: location
+    policyName: 'fwp-${appName}-${locationShort}'
+    firewallPublicIpAddress: firewallPublicIp.properties.ipAddress
+    ingressPorts: ports
+    ingressPrivateIp: ingressPrivateIp
+  }
+}
+
 // Azure Firewall Basic
-resource firewall 'Microsoft.Network/azureFirewalls@2024-05-01' = {
+resource firewall 'Microsoft.Network/azureFirewalls@2022-05-01' = {
   name: 'afw-${appName}-${locationShort}'
   location: location
   properties: {
@@ -73,6 +91,9 @@ resource firewall 'Microsoft.Network/azureFirewalls@2024-05-01' = {
           id: firewallMgmtPublicIp.id
         }
       }
+    }
+    firewallPolicy: {
+      id: fwPolicy.outputs.policyId
     }
   }
 }

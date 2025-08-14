@@ -8,7 +8,7 @@ param locationShort string
 param location string
 
 // Virtual Network
-resource vnet 'Microsoft.Network/virtualNetworks@2024-05-01' = {
+resource vnet 'Microsoft.Network/virtualNetworks@2022-05-01' = {
   name: 'vnet-${appName}-${locationShort}'
   location: location
   properties: {

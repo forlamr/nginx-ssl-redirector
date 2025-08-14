@@ -17,6 +17,7 @@ param zoneRedundant bool = false
 param logAnalyticsWorkspaceCustomerId string
 
 @description('Log Analytics Primary Key for Container App Environment')
+@secure()
 param logAnalyticsPrimaryKey string
 
 @description('Storage Account Name for Azure File mounts')
@@ -30,7 +31,7 @@ param storageAccountKey string
 param readOnlyShares array
 
 // Container App Environment (Internal/BYOVNET)
-resource containerAppEnv 'Microsoft.App/managedEnvironments@2024-03-01' = {
+resource containerAppEnv 'Microsoft.App/managedEnvironments@2025-01-01' = {
   name: 'cae-${appName}-${locationShort}'
   location: location
   properties: {
@@ -44,15 +45,19 @@ resource containerAppEnv 'Microsoft.App/managedEnvironments@2024-03-01' = {
       logAnalyticsConfiguration: {
         customerId: logAnalyticsWorkspaceCustomerId
         sharedKey: logAnalyticsPrimaryKey
-        dynamicJsonColumns: false
       }
     }
-
+    workloadProfiles: [
+      {
+        workloadProfileType: 'Consumption'
+        name: 'Consumption'
+      }
+    ]
   }
 }
 
 // Azure File shares
-resource containerAppEnvShares 'Microsoft.App/managedEnvironments/storages@2025-02-02-preview' = [for share in readOnlyShares: {
+resource containerAppEnvShares 'Microsoft.App/managedEnvironments/storages@2022-06-01-preview' = [for share in readOnlyShares: {
   parent: containerAppEnv
   name: share
   properties: {
