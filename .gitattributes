@@ -1,1 +1,2 @@
 *.sh eol=lf
+*.envsh eol=lf
