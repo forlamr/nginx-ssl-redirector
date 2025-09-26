@@ -1,10 +1,15 @@
-#Requirements installation
+# Locust Load Testing
+
+Performed load testing by simulating multiple IoT devices connecting to a proxy, evaluating system performance and scalability.
+
+
+## Requirements installation
 ```
 pip install -r requirements
 ```
 ---------------
 
-#Test Init
+## Test Init
 
 Initialization of the device IDs available for the Locust test.
 
@@ -20,7 +25,7 @@ python .\test_init.py
 
 ---------------
 
-#Locustfile
+## Locustfile
 
 Simulation of an IoT device connecting to an MQTT proxy or directly to IoT Hub and publishing messages.
 
@@ -44,7 +49,7 @@ Run multiple processors using all VM cores:
 
 ---------------
 
-# Consumer
+## Consumer
 
 Instance that consumes messages from a generic Event Hub (including IoT Hub built-in endpoint).
 Optionally, messages can be filtered for a specific group of devices.
